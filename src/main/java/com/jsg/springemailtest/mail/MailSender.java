@@ -24,12 +24,6 @@ public class MailSender {
     private static String accountPassword;
     private static boolean configured = false;
 
-    public static void configure(String sender, String password) {
-        senderAddress = sender;
-        accountPassword = password;
-        configured = true;
-    }
-
     public static void configure(String smtpHost, int smtpPort, boolean useTls, String sender, String password) {
         PROPERTIES.put(SmtpProperties.HOST, smtpHost);
         PROPERTIES.put(SmtpProperties.PORT, smtpPort);
