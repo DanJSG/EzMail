@@ -15,6 +15,7 @@ public class MailPropertyProvider {
     private static final String TLS = "tls";
     private static final String ACCOUNT = "account";
     private static final String PASSWORD = "password";
+    private static final String NAME = "name";
 
     private static final Map<String, Object> MAIL_PROPERTIES = new HashMap<>();
 
@@ -23,12 +24,14 @@ public class MailPropertyProvider {
                                  @Value("${MAIL_PORT}") int port,
                                  @Value("${MAIL_USE_TLS}") boolean useTls,
                                  @Value("${MAIL_ACCOUNT}") String emailAccount,
-                                 @Value("${MAIL_PASSWORD}") String password) {
+                                 @Value("${MAIL_PASSWORD}") String password,
+                                 @Value("${MAIL_SENDER_NAME}") String name) {
         MAIL_PROPERTIES.put(HOST, host);
         MAIL_PROPERTIES.put(PORT, port);
         MAIL_PROPERTIES.put(TLS, useTls);
         MAIL_PROPERTIES.put(ACCOUNT, emailAccount);
         MAIL_PROPERTIES.put(PASSWORD, password);
+        MAIL_PROPERTIES.put(NAME, name);
     }
 
     public static String getHost() {
@@ -49,6 +52,10 @@ public class MailPropertyProvider {
 
     public static String getPassword() {
         return (String) MAIL_PROPERTIES.get(PASSWORD);
+    }
+
+    public static String getName() {
+        return (String) MAIL_PROPERTIES.get(NAME);
     }
 
 }

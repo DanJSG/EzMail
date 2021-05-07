@@ -1,9 +1,11 @@
 package com.jsg.springemailtest.mail;
 
+import javax.activation.DataSource;
+
 public interface Email {
 
-    boolean send(String to);
-
+    String getSubject();
     String getHtmlContent();
+    DataSource[] getImages();
 
 }

@@ -9,7 +9,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 
-public class MailSender {
+public class EmailSender {
 
     private static final class SmtpProperties {
         static final String HOST = "mail.smtp.host";
@@ -20,34 +20,34 @@ public class MailSender {
     }
 
     private static final Properties PROPERTIES = System.getProperties();
-    private static String senderAddress;
+    private static String sender;
+    private static String senderAccount;
     private static String accountPassword;
     private static boolean configured = false;
 
-    public static void configure(String smtpHost, int smtpPort, boolean useTls, String sender, String password) {
+    public static void configure(String smtpHost, int smtpPort, boolean useTls, String account, String password, String name) {
         PROPERTIES.put(SmtpProperties.HOST, smtpHost);
         PROPERTIES.put(SmtpProperties.PORT, smtpPort);
         PROPERTIES.put(SmtpProperties.TLS_ENABLE, useTls);
         PROPERTIES.put(SmtpProperties.TLS_REQUIRED, useTls);
         PROPERTIES.put(SmtpProperties.USE_AUTH, true);
-        senderAddress = sender;
+        senderAccount = account;
         accountPassword = password;
+        sender = name + "<" + senderAccount + ">";
         configured = true;
     }
 
-    public static void sendHtmlMail(String subject, String htmlContent, String recipient) throws MessagingException {
-        sendHtmlMail(subject, htmlContent, recipient, null);
-    }
-
-    public static void sendHtmlMail(String subject, String htmlContent, String recipient, DataSource imageDataSource) throws MessagingException {
+    public static void send(Email email, String to) throws MessagingException {
         if (!configured) throw new IllegalStateException("MailSender has not been configured. Please call the `configure` method before calling any other methods.");
-        Message message = initializeMessage(subject, recipient);
+        Message message = initializeMessage(email.getSubject(), to);
         Multipart multipart = new MimeMultipart();
-        BodyPart messagePart = createMessagePart(htmlContent);
+        BodyPart messagePart = createMessagePart(email.getHtmlContent());
         multipart.addBodyPart(messagePart);
-        if (imageDataSource != null) {
-            BodyPart imagePart = createImagePart(imageDataSource);
-            multipart.addBodyPart(imagePart);
+        if (email.getImages() != null) {
+            for(int i = 0; i < email.getImages().length; i++) {
+                BodyPart imagePart = createImagePart(email.getImages()[i], i);
+                multipart.addBodyPart(imagePart);
+            }
         }
         message.setContent(multipart);
         Transport.send(message);
@@ -57,15 +57,15 @@ public class MailSender {
         Session session = getAuthenticatedSession();
         Message message = new MimeMessage(session);
         message.setSubject(subject);
-        message.setFrom(new InternetAddress(MailSender.senderAddress));
+        message.setFrom(new InternetAddress(EmailSender.sender));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
         return message;
     }
 
-    private static BodyPart createImagePart(DataSource imageDataSource) throws MessagingException {
+    private static BodyPart createImagePart(DataSource imageDataSource, int index) throws MessagingException {
         BodyPart imagePart = new MimeBodyPart();
         imagePart.setDataHandler(new DataHandler(imageDataSource));
-        imagePart.setHeader("Content-ID", "<image>");
+        imagePart.setHeader("Content-ID", "<image-" + index + ">");
         return imagePart;
     }
 
@@ -79,7 +79,7 @@ public class MailSender {
         return Session.getInstance(PROPERTIES, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderAddress, accountPassword);
+                return new PasswordAuthentication(senderAccount, accountPassword);
             }
         });
     }
