@@ -24,3 +24,8 @@ jobs:
         distribution: 'adopt'
     - name: Build and Test with Maven
       run: mvn -B package --file ./EzMail/pom.xml
+      
+    - name: Publish to GitHub Packages Apache Maven
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
