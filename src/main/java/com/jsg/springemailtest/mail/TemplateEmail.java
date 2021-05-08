@@ -24,7 +24,7 @@ public abstract class TemplateEmail implements Email {
      * Populate a Thymeleaf HTML template with the values provided in the context.
      *
      * @param template the HTML template to populate with values
-     * @param context the context containing the template values
+     * @param context  the context containing the template values
      * @return the populate HTML content as a {@code String}
      */
     protected static String populateHtmlTemplate(String template, Context context) {
@@ -35,8 +35,8 @@ public abstract class TemplateEmail implements Email {
      * Load an image from the application's resources folder and open it as a data source.
      *
      * @param resourcePath the relative path to the image resource
-     * @param extension the file extension
-     * @param mimeType the MIME type of the file
+     * @param extension    the file extension
+     * @param mimeType     the MIME type of the file
      * @return the image as a {@code DataSource} object, or {@code null} if loading the image failed
      */
     protected static DataSource loadImageDataSource(String resourcePath, String extension, String mimeType) {
@@ -55,9 +55,11 @@ public abstract class TemplateEmail implements Email {
      * @param templatePath the relative path to the HTML template
      * @return the HTML template's content as a {@code String}
      */
-    protected static String loadHtmlTemplate(String templatePath) {
+    protected static String loadHtmlTemplate(String templatePath) throws IOException {
+        if (!checkFileExtension(templatePath))
+            throw new IOException("Invalid file type for HTML template. Only files ending in '.html' are supported.");
         InputStream templateStream = ConfirmAccountEmail.class.getResourceAsStream(templatePath);
-        if (templateStream == null) return null;
+        if (templateStream == null) throw new FileNotFoundException("File not found.");
         BufferedReader reader = new BufferedReader(new InputStreamReader(templateStream));
         return reader.lines().collect(Collectors.joining(System.lineSeparator()));
     }
@@ -66,7 +68,7 @@ public abstract class TemplateEmail implements Email {
      * Load an image from the application's resources folder, and convert it to a byte array without writing to disk.
      *
      * @param resourcePath the path to the image
-     * @param extension the image's file extension
+     * @param extension    the image's file extension
      * @return a byte array representing the image
      * @throws IOException if their is an error whilst reading the image or writing it to the output stream
      */
@@ -79,6 +81,12 @@ public abstract class TemplateEmail implements Email {
         byte[] imageBytes = outputStream.toByteArray();
         outputStream.close();
         return imageBytes;
+    }
+
+    private static boolean checkFileExtension(String path) {
+        int index = path.lastIndexOf(".");
+        if (index == -1) return false;
+        return (index > 0 ? path.substring(index + 1) : path.substring(index)).equals("html");
     }
 
 }

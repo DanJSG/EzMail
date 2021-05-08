@@ -4,6 +4,7 @@ import com.jsg.springemailtest.mail.TemplateEmail;
 import org.thymeleaf.context.Context;
 
 import javax.activation.DataSource;
+import java.io.IOException;
 
 public class ConfirmAccountEmail extends TemplateEmail {
 
@@ -12,7 +13,9 @@ public class ConfirmAccountEmail extends TemplateEmail {
     private static final String IMAGE_PATH = "/templates/logo.png";
     private static final String IMAGE_EXTENSION = "png";
     private static final String IMAGE_MIME_TYPE = "image/png";
-    private static final String TEMPLATE = loadHtmlTemplate(TEMPLATE_PATH);
+    private static final String TEMPLATE = loadTemplate();
+
+
     private static final DataSource IMAGE_DATA_SOURCE = loadImageDataSource(IMAGE_PATH, IMAGE_EXTENSION, IMAGE_MIME_TYPE);
 
     private final String confirmAccountUrl;
@@ -39,6 +42,16 @@ public class ConfirmAccountEmail extends TemplateEmail {
     @Override
     public DataSource[] getImages() {
         return new DataSource[]{ IMAGE_DATA_SOURCE };
+    }
+
+    private static String loadTemplate() {
+        String template = null;
+        try {
+            template = loadHtmlTemplate(TEMPLATE_PATH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return template;
     }
 
 }
