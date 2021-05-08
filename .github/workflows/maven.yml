@@ -26,7 +26,7 @@ jobs:
       run: mvn -B package --file ./EzMail/pom.xml
       
     - name: Generate Javadocs Package
-      run: mvn javadoc:jar
+      run: mvn javadoc:jar --file ./EzMail/pom.xml
       
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy --file ./EzMail/pom.xml
