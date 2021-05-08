@@ -54,6 +54,8 @@ public abstract class TemplateEmail implements Email {
      *
      * @param templatePath the relative path to the HTML template
      * @return the HTML template's content as a {@code String}
+     * @throws IOException if the file has an extension other than '.html'
+     * @throws FileNotFoundException if the file does not exist
      */
     protected static String loadHtmlTemplate(String templatePath) throws IOException {
         if (!checkFileExtension(templatePath))
