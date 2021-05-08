@@ -1,4 +1,4 @@
-package com.jsg.springemailtest.mail;
+package com.jsg.ezmail;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

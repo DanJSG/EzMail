@@ -1,12 +1,13 @@
 package com.jsg.springemailtest;
 
-import com.jsg.springemailtest.mail.Email;
-import com.jsg.springemailtest.mail.EmailSender;
+import com.jsg.ezmail.Email;
+import com.jsg.ezmail.EmailSender;
 import com.jsg.springemailtest.providers.MailPropertyProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.mail.MessagingException;
+
 
 @SpringBootApplication
 public class SpringEmailTestApplication {

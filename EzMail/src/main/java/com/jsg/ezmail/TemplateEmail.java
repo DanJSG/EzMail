@@ -1,6 +1,5 @@
-package com.jsg.springemailtest.mail;
+package com.jsg.ezmail;
 
-import com.jsg.springemailtest.ConfirmAccountEmail;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -9,25 +8,27 @@ import javax.imageio.ImageIO;
 import javax.mail.util.ByteArrayDataSource;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * A HTML email using a Thymeleaf template from the resources folder. Must be extended with a specific type of
- * TemplatedEmail to instantiate. Provides helper methods for loading a template, loading images for use in the email,
- * and populating the HTML template.
+ * A HTML email using a Thymeleaf template from the resources folder. Must be extended to instantiate.
+ * Provides helper methods for loading a template, loading images for use in the email, and populating the HTML template.
  */
 public abstract class TemplateEmail implements Email {
 
-    protected static final TemplateEngine ENGINE = new TemplateEngine();
+    private static final TemplateEngine ENGINE = new TemplateEngine();
 
     /**
      * Populate a Thymeleaf HTML template with the values provided in the context.
      *
      * @param template the HTML template to populate with values
-     * @param context  the context containing the template values
+     * @param varMap a map of template variable names and their corresponding values
      * @return the populate HTML content as a {@code String}
      */
-    protected static String populateHtmlTemplate(String template, Context context) {
+    protected static String populateHtmlTemplate(String template, Map<String, Object> varMap) {
+        Context context = new Context();
+        context.setVariables(varMap);
         return TemplateEmail.ENGINE.process(template, context);
     }
 
@@ -60,7 +61,7 @@ public abstract class TemplateEmail implements Email {
     protected static String loadHtmlTemplate(String templatePath) throws IOException {
         if (!checkFileExtension(templatePath))
             throw new IOException("Invalid file type for HTML template. Only files ending in '.html' are supported.");
-        InputStream templateStream = ConfirmAccountEmail.class.getResourceAsStream(templatePath);
+        InputStream templateStream = TemplateEmail.class.getResourceAsStream(templatePath);
         if (templateStream == null) throw new FileNotFoundException("File not found.");
         BufferedReader reader = new BufferedReader(new InputStreamReader(templateStream));
         return reader.lines().collect(Collectors.joining(System.lineSeparator()));
@@ -85,6 +86,11 @@ public abstract class TemplateEmail implements Email {
         return imageBytes;
     }
 
+    /**
+     * Checks that the file path has a .html file extension. Returns {@code true} if it does, {@code false} otherwise.
+     * @param path the path of the file to check
+     * @return {@code true} if it is a .html file, {@code false} if it is not
+     */
     private static boolean checkFileExtension(String path) {
         int index = path.lastIndexOf(".");
         if (index == -1) return false;

@@ -1,11 +1,12 @@
-package com.jsg.springemailtest.mail;
+package com.jsg.ezmail;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.thymeleaf.context.Context;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TemplateEmailTests {
 
@@ -118,9 +119,9 @@ public class TemplateEmailTests {
                 "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/test.html");
-            Context context = new Context();
-            context.setVariable("testVal", "test");
-            String htmlContent = TemplateEmail.populateHtmlTemplate(template, context);
+            Map<String, Object> map = new HashMap<>();
+            map.put("testVal", "test");
+            String htmlContent = TemplateEmail.populateHtmlTemplate(template, map);
             Assertions.assertEquals(expectedValue, htmlContent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,8 +143,8 @@ public class TemplateEmailTests {
                 "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/test.html");
-            Context context = new Context();
-            String htmlContent = TemplateEmail.populateHtmlTemplate(template, context);
+            Map<String, Object> map = new HashMap<>();
+            String htmlContent = TemplateEmail.populateHtmlTemplate(template, map);
             Assertions.assertEquals(expectedValue, htmlContent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -165,9 +166,9 @@ public class TemplateEmailTests {
                 "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/invalidtest.html");
-            Context context = new Context();
-            context.setVariable("testVal", "test");
-            String htmlContent = TemplateEmail.populateHtmlTemplate(template, context);
+            Map<String, Object> map = new HashMap<>();
+            map.put("testVal", "test");
+            String htmlContent = TemplateEmail.populateHtmlTemplate(template, map);
             Assertions.assertEquals(expectedValue, htmlContent);
         } catch (IOException e) {
             e.printStackTrace();

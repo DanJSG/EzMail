@@ -1,10 +1,11 @@
 package com.jsg.springemailtest;
 
-import com.jsg.springemailtest.mail.TemplateEmail;
-import org.thymeleaf.context.Context;
+import com.jsg.ezmail.TemplateEmail;
 
 import javax.activation.DataSource;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConfirmAccountEmail extends TemplateEmail {
 
@@ -14,7 +15,6 @@ public class ConfirmAccountEmail extends TemplateEmail {
     private static final String IMAGE_EXTENSION = "png";
     private static final String IMAGE_MIME_TYPE = "image/png";
     private static final String TEMPLATE = loadTemplate();
-
 
     private static final DataSource IMAGE_DATA_SOURCE = loadImageDataSource(IMAGE_PATH, IMAGE_EXTENSION, IMAGE_MIME_TYPE);
 
@@ -33,10 +33,10 @@ public class ConfirmAccountEmail extends TemplateEmail {
 
     @Override
     public String getHtmlContent() {
-        Context context = new Context();
-        context.setVariable("url", confirmAccountUrl);
-        context.setVariable("cancelUrl", cancelAccountUrl);
-        return TemplateEmail.populateHtmlTemplate(TEMPLATE, context);
+        Map<String, Object> varMap = new HashMap<>();
+        varMap.put("url", confirmAccountUrl);
+        varMap.put("cancelUrl", cancelAccountUrl);
+        return TemplateEmail.populateHtmlTemplate(TEMPLATE, varMap);
     }
 
     @Override
