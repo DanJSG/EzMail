@@ -12,16 +12,17 @@ public class TemplateEmailTest {
 
     @Test
     void loadHtmlTemplate_successfullyLoadsExistingHtmlTemplate() {
-        String expectedValue = "<!DOCTYPE html>\r\n" +
-                "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">\r\n" +
-                "<head>\r\n" +
-                "    <meta charset=\"UTF-8\">\r\n" +
-                "    <title></title>\r\n" +
-                "</head>\r\n" +
-                "<body>\r\n" +
-                "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->\r\n" +
-                "    <p th:text=\"${testVal}\"></p>\r\n" +
-                "</body>\r\n" +
+        String expectedValue =
+                "<!DOCTYPE html>" + System.lineSeparator() +
+                "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">" + System.lineSeparator() +
+                "<head>" + System.lineSeparator() +
+                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                "    <title></title>" + System.lineSeparator() +
+                "</head>" + System.lineSeparator() +
+                "<body>" + System.lineSeparator() +
+                "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->" + System.lineSeparator() +
+                "    <p th:text=\"${testVal}\"></p>" + System.lineSeparator() +
+                "</body>" + System.lineSeparator() +
                 "</html>";
         String path = "/test.html";
         try {
@@ -85,16 +86,17 @@ public class TemplateEmailTest {
 
     @Test
     void loadHtmlTemplate_failsToLoadsExistingTemplateWithNothingBeforeCorrectFileExtension() {
-        String expectedValue = "<!DOCTYPE html>\r\n" +
-                "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">\r\n" +
-                "<head>\r\n" +
-                "    <meta charset=\"UTF-8\">\r\n" +
-                "    <title></title>\r\n" +
-                "</head>\r\n" +
-                "<body>\r\n" +
-                "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->\r\n" +
-                "    <p th:text=\"${testVal}\"></p>\r\n" +
-                "</body>\r\n" +
+        String expectedValue =
+                "<!DOCTYPE html>" + System.lineSeparator() +
+                "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">" + System.lineSeparator() +
+                "<head>" + System.lineSeparator() +
+                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                "    <title></title>" + System.lineSeparator() +
+                "</head>" + System.lineSeparator() +
+                "<body>" + System.lineSeparator() +
+                "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->" + System.lineSeparator() +
+                "    <p th:text=\"${testVal}\"></p>" + System.lineSeparator() +
+                "</body>" + System.lineSeparator() +
                 "</html>";
         String path = "/.html";
         try {
@@ -107,15 +109,16 @@ public class TemplateEmailTest {
 
     @Test
     void populateHtmlTemplate_successfullyPopulatesTemplateVariables() {
-        String expectedValue = "<!DOCTYPE html>\r\n" +
-                "<html lang=\"en\">\r\n" +
-                "<head>\r\n" +
-                "    <meta charset=\"UTF-8\">\r\n" +
-                "    <title></title>\r\n" +
-                "</head>\r\n" +
-                "<body>\r\n\r\n" +
-                "    <p>test</p>\r\n" +
-                "</body>\r\n" +
+        String expectedValue =
+                "<!DOCTYPE html>" + System.lineSeparator() +
+                "<html lang=\"en\">" + System.lineSeparator() +
+                "<head>" + System.lineSeparator() +
+                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                "    <title></title>" + System.lineSeparator() +
+                "</head>" + System.lineSeparator() +
+                "<body>" + System.lineSeparator() + System.lineSeparator() +
+                "    <p>test</p>" + System.lineSeparator() +
+                "</body>" + System.lineSeparator() +
                 "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/test.html");
@@ -131,15 +134,16 @@ public class TemplateEmailTest {
 
     @Test
     void populateHtmlTemplate_successfullyPopulateTemplateWithEmptyValues() {
-        String expectedValue = "<!DOCTYPE html>\r\n" +
-                "<html lang=\"en\">\r\n" +
-                "<head>\r\n" +
-                "    <meta charset=\"UTF-8\">\r\n" +
-                "    <title></title>\r\n" +
-                "</head>\r\n" +
-                "<body>\r\n\r\n" +
-                "    <p></p>\r\n" +
-                "</body>\r\n" +
+        String expectedValue =
+                "<!DOCTYPE html>" + System.lineSeparator() +
+                "<html lang=\"en\">" + System.lineSeparator() +
+                "<head>" + System.lineSeparator() +
+                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                "    <title></title>" + System.lineSeparator() +
+                "</head>" + System.lineSeparator() +
+                "<body>" + System.lineSeparator() + System.lineSeparator() +
+                "    <p></p>" + System.lineSeparator() +
+                "</body>" + System.lineSeparator() +
                 "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/test.html");
@@ -154,15 +158,16 @@ public class TemplateEmailTest {
 
     @Test
     void populateHtmlTemplate_successfullyPopulateInvalidTemplate() {
-        String expectedValue = "<!DOCTYPE html>\r\n" +
-                "<html lang=\"en\">\r\n" +
-                "<head>\r\n" +
-                "    <meta charset=\"UTF-8\">\r\n" +
-                "    <title></title>\r\n" +
-                "</head>\r\n" +
-                "<body>\r\n" +
-                "    <p></p>\r\n" +
-                "</body>\r\n" +
+        String expectedValue =
+                "<!DOCTYPE html>" + System.lineSeparator() +
+                "<html lang=\"en\">" + System.lineSeparator() +
+                "<head>" + System.lineSeparator() +
+                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                "    <title></title>" + System.lineSeparator() +
+                "</head>" + System.lineSeparator() +
+                "<body>" + System.lineSeparator() +
+                "    <p></p>" + System.lineSeparator() +
+                "</body>" + System.lineSeparator() +
                 "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/invalidtest.html");
