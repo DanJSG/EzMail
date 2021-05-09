@@ -22,6 +22,10 @@ jobs:
       with:
         java-version: '8'
         distribution: 'adopt'
+        
+    - name: Update Version Number
+      run: mvn -B release:update-versions --file ./EzMail/pom.xml
+    
     - name: Build and Test with Maven
       run: mvn -B package --file ./EzMail/pom.xml
       
