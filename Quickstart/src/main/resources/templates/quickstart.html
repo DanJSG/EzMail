@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+    </style>
+</head>
+
+<body style="background-color: #e6e6e6; margin: 0 !important; padding: 0 !important; font-family: sans-serif;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size: 18px;">
+        <tr>
+            <td align="center" style="padding-top: 80px; padding-bottom: 80px;">
+                <table bgcolor="#fff" style="border-radius: 8px">
+                    <tr>
+                        <td align="center" style="padding: 20px 40px 0px 40px;">
+                            <h1 style="font-weight: 100; font-size: 42px;">Hello, <span th:text="${name}"></span>!</h1>
+                            <p>This email was sent from the EzMail quickstart!</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 0px 40px 20px 40px;">
+                            <p>
+                                The HTML templating is provided by the Thymeleaf library.
+                                <br style="padding-bottom: 10px;" />
+                                <a href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html" style="color: #1d50f7; text-decoration: underline;">Check out their docs</a> for more information on how to use the templating engine for creating custom email content.
+                            </p>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 0px 40px 20px 40px;">
+                            <p>The text below is all passed from the application:</p>
+                            <p th:text="${exampleText}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 0px 40px 20px 40px;">
+                            <p>And the image below is passed by from the application:</p>
+                            <img src="cid:image-0" alt="Example image" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
