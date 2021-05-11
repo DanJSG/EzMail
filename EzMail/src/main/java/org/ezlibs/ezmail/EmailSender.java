@@ -1,4 +1,4 @@
-package com.jsg.ezmail;
+package org.ezlibs.ezmail;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

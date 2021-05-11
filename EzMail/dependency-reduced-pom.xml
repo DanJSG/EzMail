@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.jsg</groupId>
+  <groupId>org.ezlibs</groupId>
   <artifactId>EzMail</artifactId>
   <version>1.0.0</version>
   <build>
-    <finalName>EzMail</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -22,6 +21,14 @@
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -40,13 +47,45 @@
               </artifactSet>
               <relocations>
                 <relocation>
-                  <pattern>org</pattern>
-                  <shadedPattern>com.jsg.shaded.org</shadedPattern>
+                  <pattern>org.unbescape</pattern>
+                  <shadedPattern>org.ezlibs.shaded.org.unbescape</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.thymeleaf</pattern>
+                  <shadedPattern>org.ezlibs.shaded.org.thymeleaf</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.slf4j</pattern>
+                  <shadedPattern>org.ezlibs.shaded.org.slf4j</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.attoparser</pattern>
+                  <shadedPattern>org.ezlibs.shaded.org.attoparser</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>ognl</pattern>
+                  <shadedPattern>org.ezlibs.shaded.ognl</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>javassist</pattern>
+                  <shadedPattern>org.ezlibs.shaded.javassist</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.sun.activation</pattern>
+                  <shadedPattern>org.ezlibs.shaded.com.sun.activation</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>javax.activation</pattern>
+                  <shadedPattern>org.ezlibs.shaded.javax.activation</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
       </plugin>
     </plugins>
   </build>
@@ -78,6 +117,13 @@
       </exclusions>
     </dependency>
   </dependencies>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/DanJSG/EzMail</url>
+    </repository>
+  </distributionManagement>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

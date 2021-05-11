@@ -1,4 +1,4 @@
-package com.jsg.ezmail;
+package org.ezlibs.ezmail;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,16 +14,16 @@ public class TemplateEmailTest {
     void loadHtmlTemplate_successfullyLoadsExistingHtmlTemplate() {
         String expectedValue =
                 "<!DOCTYPE html>" + System.lineSeparator() +
-                "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">" + System.lineSeparator() +
-                "<head>" + System.lineSeparator() +
-                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
-                "    <title></title>" + System.lineSeparator() +
-                "</head>" + System.lineSeparator() +
-                "<body>" + System.lineSeparator() +
-                "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->" + System.lineSeparator() +
-                "    <p th:text=\"${testVal}\"></p>" + System.lineSeparator() +
-                "</body>" + System.lineSeparator() +
-                "</html>";
+                        "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">" + System.lineSeparator() +
+                        "<head>" + System.lineSeparator() +
+                        "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                        "    <title></title>" + System.lineSeparator() +
+                        "</head>" + System.lineSeparator() +
+                        "<body>" + System.lineSeparator() +
+                        "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->" + System.lineSeparator() +
+                        "    <p th:text=\"${testVal}\"></p>" + System.lineSeparator() +
+                        "</body>" + System.lineSeparator() +
+                        "</html>";
         String path = "/test.html";
         try {
             String template = TemplateEmail.loadHtmlTemplate(path);
@@ -88,16 +88,16 @@ public class TemplateEmailTest {
     void loadHtmlTemplate_failsToLoadsExistingTemplateWithNothingBeforeCorrectFileExtension() {
         String expectedValue =
                 "<!DOCTYPE html>" + System.lineSeparator() +
-                "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">" + System.lineSeparator() +
-                "<head>" + System.lineSeparator() +
-                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
-                "    <title></title>" + System.lineSeparator() +
-                "</head>" + System.lineSeparator() +
-                "<body>" + System.lineSeparator() +
-                "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->" + System.lineSeparator() +
-                "    <p th:text=\"${testVal}\"></p>" + System.lineSeparator() +
-                "</body>" + System.lineSeparator() +
-                "</html>";
+                        "<html xmlns:th=\"http://www.thymeleaf.org\" lang=\"en\">" + System.lineSeparator() +
+                        "<head>" + System.lineSeparator() +
+                        "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                        "    <title></title>" + System.lineSeparator() +
+                        "</head>" + System.lineSeparator() +
+                        "<body>" + System.lineSeparator() +
+                        "<!--/*@thymesVar id=\"testVal\" type=\"java.lang.String\"*/-->" + System.lineSeparator() +
+                        "    <p th:text=\"${testVal}\"></p>" + System.lineSeparator() +
+                        "</body>" + System.lineSeparator() +
+                        "</html>";
         String path = "/.html";
         try {
             String template = TemplateEmail.loadHtmlTemplate(path);
@@ -111,15 +111,15 @@ public class TemplateEmailTest {
     void populateHtmlTemplate_successfullyPopulatesTemplateVariables() {
         String expectedValue =
                 "<!DOCTYPE html>" + System.lineSeparator() +
-                "<html lang=\"en\">" + System.lineSeparator() +
-                "<head>" + System.lineSeparator() +
-                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
-                "    <title></title>" + System.lineSeparator() +
-                "</head>" + System.lineSeparator() +
-                "<body>" + System.lineSeparator() + System.lineSeparator() +
-                "    <p>test</p>" + System.lineSeparator() +
-                "</body>" + System.lineSeparator() +
-                "</html>";
+                        "<html lang=\"en\">" + System.lineSeparator() +
+                        "<head>" + System.lineSeparator() +
+                        "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                        "    <title></title>" + System.lineSeparator() +
+                        "</head>" + System.lineSeparator() +
+                        "<body>" + System.lineSeparator() + System.lineSeparator() +
+                        "    <p>test</p>" + System.lineSeparator() +
+                        "</body>" + System.lineSeparator() +
+                        "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/test.html");
             Map<String, Object> map = new HashMap<>();
@@ -136,15 +136,15 @@ public class TemplateEmailTest {
     void populateHtmlTemplate_successfullyPopulateTemplateWithEmptyValues() {
         String expectedValue =
                 "<!DOCTYPE html>" + System.lineSeparator() +
-                "<html lang=\"en\">" + System.lineSeparator() +
-                "<head>" + System.lineSeparator() +
-                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
-                "    <title></title>" + System.lineSeparator() +
-                "</head>" + System.lineSeparator() +
-                "<body>" + System.lineSeparator() + System.lineSeparator() +
-                "    <p></p>" + System.lineSeparator() +
-                "</body>" + System.lineSeparator() +
-                "</html>";
+                        "<html lang=\"en\">" + System.lineSeparator() +
+                        "<head>" + System.lineSeparator() +
+                        "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                        "    <title></title>" + System.lineSeparator() +
+                        "</head>" + System.lineSeparator() +
+                        "<body>" + System.lineSeparator() + System.lineSeparator() +
+                        "    <p></p>" + System.lineSeparator() +
+                        "</body>" + System.lineSeparator() +
+                        "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/test.html");
             Map<String, Object> map = new HashMap<>();
@@ -160,15 +160,15 @@ public class TemplateEmailTest {
     void populateHtmlTemplate_successfullyPopulateInvalidTemplate() {
         String expectedValue =
                 "<!DOCTYPE html>" + System.lineSeparator() +
-                "<html lang=\"en\">" + System.lineSeparator() +
-                "<head>" + System.lineSeparator() +
-                "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
-                "    <title></title>" + System.lineSeparator() +
-                "</head>" + System.lineSeparator() +
-                "<body>" + System.lineSeparator() +
-                "    <p></p>" + System.lineSeparator() +
-                "</body>" + System.lineSeparator() +
-                "</html>";
+                        "<html lang=\"en\">" + System.lineSeparator() +
+                        "<head>" + System.lineSeparator() +
+                        "    <meta charset=\"UTF-8\">" + System.lineSeparator() +
+                        "    <title></title>" + System.lineSeparator() +
+                        "</head>" + System.lineSeparator() +
+                        "<body>" + System.lineSeparator() +
+                        "    <p></p>" + System.lineSeparator() +
+                        "</body>" + System.lineSeparator() +
+                        "</html>";
         try {
             String template = TemplateEmail.loadHtmlTemplate("/invalidtest.html");
             Map<String, Object> map = new HashMap<>();

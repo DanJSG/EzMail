@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jsg</groupId>
-    <artifactId>ezmail</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.4</version>
+    <groupId>org.ezlibs</groupId>
+    <artifactId>EzMail</artifactId>
+    <version>1.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,7 +21,6 @@
     </distributionManagement>
 
     <build>
-        <finalName>ezmail</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -67,8 +67,36 @@
                             </artifactSet>
                             <relocations>
                                 <relocation>
-                                    <pattern>org</pattern>
-                                    <shadedPattern>com.jsg.shaded.org</shadedPattern>
+                                    <pattern>org.unbescape</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.org.unbescape</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.thymeleaf</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.org.thymeleaf</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.slf4j</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.org.slf4j</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.attoparser</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.org.attoparser</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>ognl</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.ognl</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javassist</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.javassist</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.sun.activation</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.com.sun.activation</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javax.activation</pattern>
+                                    <shadedPattern>org.ezlibs.shaded.javax.activation</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
