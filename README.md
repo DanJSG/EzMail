@@ -32,3 +32,7 @@ This shows how to configure your SMTP settings, create a templated email class a
 If you have not already configured an SMTP server for development, [this support article](https://support.google.com/a/answer/176600?hl=en) shows how to configure your Gmail account to allow mail to be sent from an application.  
 
 For more information on how to use the Thymeleaf HTML templating engine, refer [to their docs](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html).
+
+## License
+
+This repository is available under the [MIT License](https://github.com/DanJSG/EzMail/blob/main/LICENSE).
