@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ezlibs</groupId>
-    <artifactId>EzMail</artifactId>
-    <version>1.0.0</version>
+    <artifactId>ezmail</artifactId>
+    <version>1.0.1</version>
 
     <name>EzMail</name>
     <description>Simple library for sending HTML templated emails.</description>
@@ -31,7 +31,7 @@
         <developerConnection>scm:git:ssh://github.com:DanJSG/EzMail.git</developerConnection>
         <url>http://github.com/DanJSG/EzMail/tree/master</url>
     </scm>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
