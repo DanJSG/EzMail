@@ -7,7 +7,7 @@ Add the follow to the dependencies section of your pom.xml:
 ```xml
 <dependency>
   <groupId>org.ezlibs</groupId>
-  <artifactId>ezjooq</artifactId>
+  <artifactId>ezmail</artifactId>
   <version>1.0.1</version>
 </dependency>
 ```
